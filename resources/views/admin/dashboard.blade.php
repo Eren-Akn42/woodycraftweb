@@ -9,6 +9,6 @@
     </head>
     
     <body>
-        
+        <p>Bienvenue dans la page admin</p>
     </body>
 </html>
