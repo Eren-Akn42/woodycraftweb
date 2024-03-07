@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->string('username');
             $table->string('password');
+            $table->boolean('isAdmin')->default(false);
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use App\Models\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
     public function register(Request $request)
     {
@@ -21,12 +21,12 @@ class AuthController extends Controller
             'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
 
-        $user = Login::create([
+        $login = Login::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
 
-        Auth::login($user);
+        Auth::login($login);
 
         return redirect('/');
     }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -18,7 +18,7 @@ Route::get('/login', function () {
 })->name('login');
 
 // Route pour traiter la soumission du formulaire de connexion
-Route::post('/login', [AuthController::class, 'login'])->name('login.perform');
+Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 
 // Route pour afficher le formulaire d'inscription
 Route::get('/register', function () {
@@ -26,7 +26,7 @@ Route::get('/register', function () {
 })->name('register');
 
 // Route pour traiter la soumission du formulaire d'inscription
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [LoginController::class, 'register']);
 
 // Route pour déconnecter l'utilisateur
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
