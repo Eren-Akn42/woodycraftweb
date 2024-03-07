@@ -1,9 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $account = Auth::user();
+        return view('home', ['account' => $account]);
+    }
     return view('home');
 });
 
@@ -22,3 +27,6 @@ Route::get('/register', function () {
 
 // Route pour traiter la soumission du formulaire d'inscription
 Route::post('/register', [AuthController::class, 'register']);
+
+// Route pour déconnecter l'utilisateur
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

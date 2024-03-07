@@ -26,25 +26,33 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect('/login')->with('success', 'Compte créé avec succès.');
+        Auth::login($user);
+
+        return redirect('/');
     }
     
     public function login(Request $request)
-{
-    $credentials = $request->validate([
-        'username' => ['required', 'string'],
-        'password' => ['required', 'string'],
-    ]);
+    {
+        $credentials = $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->intended('/')->with('success', 'Connexion réussie !');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/')->with('success', 'Connexion réussie !');
+        }
+
+        return back()->withErrors([
+            'login_error' => 'Les informations de connexion fournies ne sont pas valides.',
+        ])->onlyInput('username');
     }
 
-    return back()->withErrors([
-        'login_error' => 'Les informations de connexion fournies ne sont pas valides.', // Modification ici
-    ])->onlyInput('username');
-}
-
-
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }
