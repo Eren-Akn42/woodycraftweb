@@ -10,15 +10,25 @@
     
     <body>
         @if (Auth::guest())
+            <!-- Contenu pour les invités -->
+        @endif
+
+        @if (isset($account))
+            <!-- Contenu pour les utilisateurs authentifiés -->
+        @endif
+
+            <!-- Après -->
+        @guest
             <a href="{{ route('register') }}">Créer un compte</a>
             <a href="{{ route('login') }}">Se connecter</a>
-        @endif
-        @if (isset($account))
+        @endguest
+
+        @auth
             <a href="#">Mon compte</a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit">Déconnexion</button>
             </form>
-        @endif
+        @endauth
     </body>
 </html>
