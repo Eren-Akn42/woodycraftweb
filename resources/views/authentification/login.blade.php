@@ -8,24 +8,24 @@
     </head>
     
     <body>
-        @if(session('success'))
-            <div style="color: green;">
-                {{ session('success') }}
-            </div>
-            <br>
-        @endif
-
-        @if ($errors->any())
-            <div style="color: red;">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            <br>
-        @endif
-
         <form action="{{ route('login') }}" method="POST">
             @csrf
+
+            @if(session('success'))
+                <div style="color: green;">
+                    {{ session('success') }}
+                </div>
+                <br>
+            @endif
+
+            @if ($errors->any())
+                <div style="color: red;">
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+                <br>
+            @endif
     
             <div>
                 <label for="username">Nom d'utilisateur :</label>

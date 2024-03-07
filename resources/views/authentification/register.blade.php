@@ -8,16 +8,18 @@
     </head>
     
     <body>
-        @if ($errors->any())
-            <div>
-                @foreach ($errors->all() as $error)
-                    <p style="color: red;">{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
+        
         <form action="{{ route('register') }}" method="POST">
             @csrf
-    
+            
+            @if ($errors->any())
+                <div>
+                    @foreach ($errors->all() as $error)
+                        <p style="color: red;">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
             <div>
                 <label for="username">Nom d'utilisateur :</label>
                 <input type="text" id="username" name="username" required>
