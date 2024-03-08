@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categorie_id');
+            $table->unsignedBigInteger('categorie_id')->nullable();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->text('description');

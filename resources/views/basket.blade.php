@@ -23,9 +23,5 @@
         @endauth
 
         <a href="{{ route('categories') }}">Catégories</a>
-
-        @foreach($products as $product)
-            <li> {{ $product->name }} </li>
-        @endforeach
     </body>
 </html>
