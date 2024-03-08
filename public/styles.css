@@ -3,3 +3,14 @@
     margin: 0;
     padding: 0;
 }
+
+.button-as-link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}

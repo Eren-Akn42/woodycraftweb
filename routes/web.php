@@ -8,10 +8,6 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Middleware\PreventCacheMiddleware;
 
 Route::get('/', [ProductController::class, 'index'] , function () {
-    if (Auth::check()) {
-        $account = Auth::user();
-        return view('home', ['account' => $account]);
-    }
     return view('home');
 })->name('home');
 

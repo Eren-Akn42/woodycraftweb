@@ -10,9 +10,7 @@ class Login extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
-    protected $table = 'logins';
     protected $fillable = ['username', 'password'];
-    public $timestamps = false;
 
     public function customer()
     {
