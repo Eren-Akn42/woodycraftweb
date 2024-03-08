@@ -14,6 +14,7 @@
                 {{-- Éléments en commun --}}
                 <a href="{{ route('home') }}">Accueil</a>
                 <a href="{{ route('categories') }}">Catégories</a>
+                <a href="#">Mon panier</a>
 
                 {{-- Si l'utilisateur est un visiteur --}}
                 @guest
@@ -23,7 +24,7 @@
 
                 {{-- Si l'utilisateur est un client --}}
                 @auth
-                    <a href="#">Mon compte</a>
+                    <a href="#">Compte : {{ Auth::user()->username }}</a>
                     <form action="{{ route('logout') }}" method="POST">@csrf<button id="logout-button" type="submit">Déconnexion</button></form>
                 @endauth
             </nav>

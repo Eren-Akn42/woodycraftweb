@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    Panier - Woodycraftweb
+    Basket - Woodycraftweb
 @endsection
 
 @section('content')
+    <h1>Basket</h1>
+
     <p>En développement</p>
+
 @endsection

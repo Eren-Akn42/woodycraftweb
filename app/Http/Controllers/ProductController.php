@@ -17,6 +17,7 @@ class ProductController extends Controller
     public function showByCategory(Categorie $categorie)
     {
         $products = $categorie->products;
-        return view('products', compact('products'));
+        $categoryName = $categorie->name;
+        return view('products', compact('products', 'categoryName'));
     }
 }

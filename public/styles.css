@@ -209,6 +209,7 @@ header nav p:hover {
     border: 1px solid black;
     transition: 0.4s ease;
     margin-top: 25px;
+    cursor: pointer;
 }
 
 #login-form button:hover {

@@ -11,16 +11,6 @@ Route::get('/', [ProductController::class, 'index'] , function () {
     return view('home');
 })->name('home');
 
-Route::get('/categories', [CategorieController::class, 'index'], function () {
-    return view('categories');
-})->name('categories');
-
-Route::get('/categories/{categorie}', [ProductController::class, 'showByCategory']);
-
-Route::get('/basket', function () {
-    return view('basket');
-})->name('basket');
-
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -34,6 +24,12 @@ Route::get('/register', function () {
 Route::post('/register', [LoginController::class, 'register']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/categories', [CategorieController::class, 'index'], function () {
+    return view('categories');
+})->name('categories');
+
+Route::get('/categories/{categorie}', [ProductController::class, 'showByCategory']);
 
 Route::middleware('admin')->get('/admin', function () {
     return view('admin');
