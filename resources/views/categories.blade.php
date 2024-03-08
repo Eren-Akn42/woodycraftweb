@@ -6,8 +6,12 @@
 
 @section('content')
 
-    @foreach($categories as $categorie)
-        <li> {{ $categorie->name }} </li>
-    @endforeach
+    <h1>Toutes nos catégories à votre service</h1>
+
+    <div class="categorie-box">
+        @foreach($categories as $categorie)
+            <x-categorie :categorie="$categorie"/>
+        @endforeach
+    </div>
 
 @endsection

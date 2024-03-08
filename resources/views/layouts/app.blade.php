@@ -9,25 +9,25 @@
     </head>
 
     <body>
+        <header>
+            <nav>
+                {{-- Éléments en commun --}}
+                <a href="{{ route('home') }}">Accueil</a>
+                <a href="{{ route('categories') }}">Catégories</a>
 
-        {{-- Éléments en commun --}}
-        <a href="{{ route('home') }}">Accueil</a>
-        <a href="{{ route('categories') }}">Catégories</a>
+                {{-- Si l'utilisateur est un visiteur --}}
+                @guest
+                    <a href="{{ route('register') }}">Créer un compte</a>
+                    <a href="{{ route('login') }}">Se connecter</a>
+                @endguest
 
-        {{-- Si l'utilisateur est un visiteur --}}
-        @guest
-            <a href="{{ route('register') }}">Créer un compte</a>
-            <a href="{{ route('login') }}">Se connecter</a>
-        @endguest
-
-        {{-- Si l'utilisateur est un client --}}
-        @auth
-            <p>Compte : {{ Auth::user()->username }}</p>
-            <form action="{{ route('logout') }}" method="POST">@csrf<button class="button-as-link" type="submit">Déconnexion</button></form>
-        @endauth
-
-        <br><br>
-
+                {{-- Si l'utilisateur est un client --}}
+                @auth
+                    <a href="#">Mon compte</a>
+                    <form action="{{ route('logout') }}" method="POST">@csrf<button id="logout-button" type="submit">Déconnexion</button></form>
+                @endauth
+            </nav>
+        </header>
         @yield('content')
     </body>
 </html>

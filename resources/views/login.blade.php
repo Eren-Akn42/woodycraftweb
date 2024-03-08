@@ -5,41 +5,19 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('login') }}" method="POST">
+
+    <h1>Pour se connecter, c'est par ici</h1>
+
+    <form id="login-form" action="{{ route('login') }}" method="POST">
         @csrf
 
-        @if(session('success'))
-            <div style="color: green;">
-                {{ session('success') }}
-            </div>
-            <br>
-        @endif
+        <x-error-message :message="session('login_error')"/><br>
 
-        @if ($errors->any())
-            <div style="color: red;">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            <br>
-        @endif
+        <x-input-field type="text" name="username" :value="old('username')" placeholder="Nom d'utilisateur"/><br>
 
-        <div>
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="username" required value="{{ old('username') }}">
-        </div>
+        <x-input-field type="password" name="password" value="" placeholder="Mot de passe" /><br>
 
-        <br>
-
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <br>
-
-        <div>
-            <button type="submit">Connexion</button>
-        </div>
+        <x-button type="submit" label="Connexion"/>
     </form>
+
 @endsection

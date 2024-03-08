@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-    
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -40,13 +40,12 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'Connexion réussie !');
+            return redirect('/');
         }
 
-        return back()->withErrors([
-            'login_error' => 'Les informations de connexion fournies ne sont pas valides.',
-        ])->onlyInput('username');
+        return back()->with('login_error', 'Les informations de connexion fournies ne sont pas valides.')->onlyInput('username');
     }
+
 
     public function logout(Request $request)
     {

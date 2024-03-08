@@ -15,6 +15,8 @@ Route::get('/categories', [CategorieController::class, 'index'], function () {
     return view('categories');
 })->name('categories');
 
+Route::get('/categories/{categorie}', [ProductController::class, 'showByCategory']);
+
 Route::get('/basket', function () {
     return view('basket');
 })->name('basket');

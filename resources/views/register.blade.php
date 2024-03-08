@@ -6,41 +6,26 @@
 
 @section('content')
 
-    <form action="{{ route('register') }}" method="POST">
+    <h1>Pour créer un compte, c'est par ici</h1>
+
+    <form id="login-form" action="{{ route('register') }}" method="POST">
         @csrf
 
         @if ($errors->any())
             <div>
                 @foreach ($errors->all() as $error)
-                    <p style="color: red;">{{ $error }}</p>
+                    <x-error-message :message="$error" /><br>
                 @endforeach
             </div>
         @endif
 
-        <div>
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="username" required>
-        </div>
+        <x-input-field type="text" name="username" :value="old('username')" placeholder="Nom d'utilisateur"/><br>
 
-        <br>
+        <x-input-field type="password" name="password" value="" placeholder="Mot de passe"/><br>
 
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-        </div>
+        <x-input-field type="password" name="password_confirmation" value="" placeholder="Confirmation du mot de passe"/><br>
 
-        <br>
-
-        <div>
-            <label for="password_confirmation">Confirmer le mot de passe :</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" required>
-        </div>
-
-        <br>
-
-        <div>
-            <button type="submit">S'inscrire</button>
-        </div>
+        <x-button type="submit" label="S'inscrire"/>
     </form>
 
 @endsection

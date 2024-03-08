@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    Page d'accueil - Woodycraftweb
+    Catégorie - Woodycraftweb
 @endsection
 
 @section('content')
 
-    <h1>Bienvenue sur Woodycraft</h1>
+    <h1>{{ $products[1]->categorie_id }}</h1>
 
     <div class="product-box">
-        @foreach ($products as $product)
+        @foreach($products as $product)
             <x-product :product="$product"/>
         @endforeach
     </div>
