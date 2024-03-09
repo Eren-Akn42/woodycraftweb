@@ -14,7 +14,7 @@
                 {{-- Éléments en commun --}}
                 <a href="{{ route('home') }}">Accueil</a>
                 <a href="{{ route('categories') }}">Catégories</a>
-                <a href="#">Mon panier</a>
+                <a href="{{ route('cart') }}">Mon panier</a>
 
                 {{-- Si l'utilisateur est un visiteur --}}
                 @guest

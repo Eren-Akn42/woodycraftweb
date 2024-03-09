@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Login;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +22,12 @@ class LoginController extends Controller
             'password.confirmed' => 'Les mots de passe ne correspondent pas.',
         ]);
 
+        $customer = Customer::create();
+
         $login = Login::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
+            'customer_id' => $customer->id,
         ]);
 
         Auth::login($login);

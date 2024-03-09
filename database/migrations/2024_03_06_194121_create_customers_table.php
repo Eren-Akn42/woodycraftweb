@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('forename');
-            $table->string('surname');
-            $table->string('add1');
-            $table->string('add2');
-            $table->string('add3');
-            $table->string('postcode');
-            $table->string('phone');
-            $table->string('email');
-            $table->tinyInteger('registered');
+            $table->string('forename')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('add1')->nullable();
+            $table->string('add2')->nullable();
+            $table->string('add3')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->tinyInteger('registered')->nullable();
             $table->timestamps();
         });
     }

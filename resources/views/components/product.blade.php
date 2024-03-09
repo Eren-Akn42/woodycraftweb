@@ -3,5 +3,5 @@
     <p>{{ $product->description }}</p>
     <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}">
     <p>{{ number_format($product->price, 2) }}€</p>
-    <a href="#">Ajouter au panier</a>
+    <a href="{{ route('product.quantity', $product->id) }}">Choisir la quantité</a>
 </div>
