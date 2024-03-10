@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <h1>Toutes nos catégories à votre service</h1>
+    <h1>Catégories</h1>
 
     <div class="categorie-box">
         @foreach($categories as $categorie)

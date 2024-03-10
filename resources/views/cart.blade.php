@@ -44,7 +44,7 @@
             </tbody>
         </table>
         <div>
-            <a href="#">Passer à la caisse</a>
+            <a href="{{ route('addresse') }}">Passer à la caisse</a>
         </div>
     @else
         <p>Votre panier est vide.</p>

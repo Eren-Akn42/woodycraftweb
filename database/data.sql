@@ -1,0 +1,31 @@
+INSERT INTO `categories` (`id`, `name`, `description`, `image`) VALUES
+(1, 'music', 'Description de la catégorie musique', 'musicAccordeon.png'),
+(2, 'vehicule', 'Description de la catégorie véhicule', 'truck.png'),
+(3, 'steampunk', 'Description de la catégorie steampunk', 'steampunkSpaceShip.png');
+
+INSERT INTO `products` (`id`, `categorie_id`, `name`, `description`, `image`, `price`) VALUES
+(4, 2, 'jeep', 'description du contenu de la boite', 'jeep.png', 12.90),
+(5, 2, 'carosse citrouille', 'description du contenu de la boite', 'pumpkinCar.png', 10.50),
+(6, 2, 'voiture de course', 'description du contenu de la boite', 'raceCar.png', 6.90),
+(7, 2, 'camion', 'description du contenu de la boite', 'truck.png', 7.90),
+(8, 1, 'accordeon', 'description du contenu de la boite', 'musicAccordeon.png', 15.50),
+(9, 1, 'batterie', 'description du contenu de la boite', 'musicDrum.png', 32.00),
+(10, 1, 'saxophone', 'description du contenu de la boite', 'musicSaxo.png', 25.00),
+(11, 1, 'guitare electrique', 'description du contenu de la boite', 'musicElectricGuitar.png', 8.30),
+(12, 1, 'violoncelle', 'description du contenu de la boite', 'notAvailable.png', 9.90),
+(13, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 5.20),
+(14, 1, 'Produit à venir', 'description du contenu de la boite ', 'notAvailable.png', 3.20),
+(15, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 7.30),
+(16, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 4.60),
+(17, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 15.00),
+(18, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 45.00),
+(19, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 28.10),
+(20, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 10.50),
+(21, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 8.90),
+(22, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 13.90),
+(23, 1, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 15.30),
+(24, 3, 'horloge chouette', 'description du contenu de la boite', 'owlClock.png', 20.50),
+(25, 3, 'steampunkRabbit', 'description du contenu de la boite', 'steampunkRabbit.png', 10.80),
+(26, 3, 'steampunkSpaceShip', 'description du contenu de la boite', 'steampunkSpaceShip.png', 12.30),
+(27, 3, 'steampunkSubMarine', 'description du contenu de la boite', 'steampunkSubMarine.png', 13.50),
+(28, 3, 'Produit à venir', 'description du contenu de la boite', 'notAvailable.png', 25.30);

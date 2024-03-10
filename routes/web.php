@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DeliveryAddresseController;
 use App\Http\Middleware\PreventCacheMiddleware;
 
 // Accueil
@@ -42,6 +43,15 @@ Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::get('/product/{product}/quantity', [ProductController::class, 'ShowQuantityForm'])->name('product.quantity');
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+// Liste des adresses
+Route::get('/addresse', [DeliveryAddresseController::class, 'index'])->name('addresse');
+
+// Formulaire de création d'une nouvelle adresse
+Route::get('/addresse/create', [DeliveryAddresseController::class, 'create'])->name('addresse.create');
+
+// Enregistrement d'une nouvelle adresse
+Route::post('/addresse', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
 
 // Admin
 Route::middleware('admin')->get('/admin', function () {
