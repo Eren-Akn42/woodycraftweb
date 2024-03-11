@@ -44,11 +44,11 @@ Route::get('/product/{product}/quantity', [ProductController::class, 'ShowQuanti
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
-// Liste des adresses
-Route::get('/addresse', [DeliveryAddresseController::class, 'index'])->name('addresse');
-
 // Formulaire de création d'une nouvelle adresse
 Route::get('/addresse/create', [DeliveryAddresseController::class, 'create'])->name('addresse.create');
+
+// Pour lister les adresses existantes et fournir un bouton pour rediriger vers la création d'une nouvelle adresse
+Route::get('/addresse/index', [DeliveryAddresseController::class, 'index'])->name('addresse.index');
 
 // Enregistrement d'une nouvelle adresse
 Route::post('/addresse', [DeliveryAddresseController::class, 'store'])->name('addresse.store');

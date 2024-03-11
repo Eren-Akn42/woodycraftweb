@@ -1,7 +1,7 @@
 INSERT INTO `categories` (`id`, `name`, `description`, `image`) VALUES
-(1, 'music', 'Description de la catégorie musique', 'musicAccordeon.png'),
-(2, 'vehicule', 'Description de la catégorie véhicule', 'truck.png'),
-(3, 'steampunk', 'Description de la catégorie steampunk', 'steampunkSpaceShip.png');
+(1, 'Musique', 'Description de la catégorie musique', 'musicAccordeon.png'),
+(2, 'Véhicule', 'Description de la catégorie véhicule', 'truck.png'),
+(3, 'Steampunk', 'Description de la catégorie steampunk', 'steampunkSpaceShip.png');
 
 INSERT INTO `products` (`id`, `categorie_id`, `name`, `description`, `image`, `price`) VALUES
 (4, 2, 'jeep', 'description du contenu de la boite', 'jeep.png', 12.90),

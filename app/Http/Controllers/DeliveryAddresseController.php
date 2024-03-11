@@ -5,42 +5,74 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DeliveryAddresse;
+use App\Models\Customer;
 
 class DeliveryAddresseController extends Controller
 {
-    public function index()
-    {
-        // Assurer que l'utilisateur est connecté pour accéder à ses adresses
-        if (!Auth::check()) {
-            return redirect()->route('home'); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
-        }
-
-        $user = Auth::user();
-        // Assumer que tu as une relation définie dans User pour les adresses
-        $addresses = $user->deliveryAddresses; // Récupère les adresses de l'utilisateur
-
-        return view('address.index', compact('addresses'));
-    }
-
     public function create()
     {
-        return view('create'); // Retourne la vue pour créer une nouvelle adresse
+        return view('addresse.create');
+    }
+
+    public function index()
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return view('login');
+        }
+
+        $customerId = $user->customer_id;
+
+        $customer = Customer::find($customerId);
+
+        if($customer->registered == NULL) {
+            return view('addresse.create');
+        }
+
+        $addresse = [
+            $customer->forename,
+            $customer->surname,
+            $customer->add1,
+            $customer->add2,
+            $customer->add3,
+            $customer->postcode,
+            $customer->phone,
+            $customer->email,
+        ];
+
+        return view('addresse.index', compact('addresse'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'forename' => 'required',
-            'surname' => 'required',
-            'add1' => 'required',
-            'postcode' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
+        // Validation des données entrées
+        $validated = $request->validate([
+            'forename' => 'required|max:100',
+            'surname' => 'required|max:100',
+            'add1' => 'required|max:100',
+            'add2' => 'max:100',
+            'add3' => 'max:100',
+            'postcode' => 'required|max:5',
+            'phone' => 'required|max:10',
+            'email' => 'required|max:100',
         ]);
 
-        $user = Auth::user();
-        $user->deliveryAddresses()->create($request->all()); // Crée une nouvelle adresse pour l'utilisateur
+        // Création et sauvegarde de la nouvelle adresse
+        $adresse = new DeliveryAddresse();
 
-        return redirect()->route('address.index')->with('success', 'Adresse ajoutée avec succès.');
+        $adresse->forename = $request->forename;
+        $adresse->surname = $request->surname;
+        $adresse->add1 = $request->add1;
+        $adresse->add2 = $request->add2;
+        $adresse->add3 = $request->add3;
+        $adresse->postcode = $request->postcode;
+        $adresse->phone = $request->phone;
+        $adresse->email = $request->email;
+
+        $adresse->save();
+
+        // Redirection vers la page de paiement
+        return redirect()->route('paiement.index', compact('adresse'));
     }
 }

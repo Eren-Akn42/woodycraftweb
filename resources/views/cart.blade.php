@@ -43,9 +43,13 @@
                 @endforeach
             </tbody>
         </table>
-        <div>
-            <a href="{{ route('addresse') }}">Passer à la caisse</a>
-        </div>
+        @guest
+            <a href="{{ route('addresse.create') }}">Passer à la caisse</a>
+        @endguest
+        @auth
+            <a href="{{ route('addresse.index') }}">Passer à la caisse</a>
+        @endauth
+
     @else
         <p>Votre panier est vide.</p>
     @endif

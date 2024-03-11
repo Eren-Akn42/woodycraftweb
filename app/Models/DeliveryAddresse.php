@@ -10,11 +10,6 @@ class DeliveryAddresse extends Model
         'forename', 'surname', 'add1', 'add2', 'add3', 'postcode', 'phone', 'email'
     ];
 
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
     public function orders()
     {
         return $this->hasMany(Order::class);
