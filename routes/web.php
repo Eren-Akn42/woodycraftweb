@@ -7,7 +7,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryAddresseController;
-use App\Http\Middleware\PreventCacheMiddleware;
 
 // Accueil
 Route::get('/', [ProductController::class, 'index'] , function () {
@@ -16,14 +15,14 @@ Route::get('/', [ProductController::class, 'index'] , function () {
 
 // Connexion
 Route::get('/login', function () {
-    return view('login');
+    return view('authentication.login');
 })->name('login');
 
 Route::post('/login', [LoginController::class, 'login']);
 
 // Inscription
 Route::get('/register', function () {
-    return view('register');
+    return view('authentication.register');
 })->name('register');
 
 Route::post('/register', [LoginController::class, 'register']);
@@ -36,10 +35,10 @@ Route::get('/categories', [CategorieController::class, 'index'], function () {
     return view('categories');
 })->name('categories');
 
-Route::get('/categories/{categorie}', [ProductController::class, 'showByCategory']);
+Route::get('/categories/{id}', [CategorieController::class, 'showByCategorie'])->name('categorie.products');
 
 // Panier
-Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/product/{product}/quantity', [ProductController::class, 'ShowQuantityForm'])->name('product.quantity');
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
@@ -54,6 +53,6 @@ Route::get('/addresse/index', [DeliveryAddresseController::class, 'index'])->nam
 Route::post('/addresse', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
 
 // Admin
-Route::middleware('admin')->get('/admin', function () {
+Route::get('/admin', function () {
     return view('admin');
 });

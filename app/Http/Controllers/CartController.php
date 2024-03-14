@@ -7,6 +7,12 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        $cart = session()->get('cart', []);
+        return view('cart', compact('cart'));
+    }
+
     public function addToCart(Request $request, $productId)
     {
         $product = Product::findOrFail($productId);
@@ -40,9 +46,5 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produit retiré du panier avec succès !');
     }
 
-    public function showCart()
-    {
-        $cart = session()->get('cart', []);
-        return view('cart', compact('cart'));
-    }
+
 }

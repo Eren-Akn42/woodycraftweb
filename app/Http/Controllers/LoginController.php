@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Login;
+use App\Models\User;
+use App\Models\Admin;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255|unique:logins',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'username.required' => 'Le nom d’utilisateur est requis.',
@@ -24,13 +25,13 @@ class LoginController extends Controller
 
         $customer = Customer::create();
 
-        $login = Login::create([
+        $user = User::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'customer_id' => $customer->id,
         ]);
 
-        Auth::login($login);
+        Auth::login($user);
 
         return redirect('/');
     }
@@ -42,14 +43,20 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        // Gardien des utilisateurs standards
+        if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('/');
         }
 
+        // Gardien des administrateurs
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/admin');
+        }
+
         return back()->with('login_error', 'Les informations de connexion fournies ne sont pas valides.')->onlyInput('username');
     }
-
 
     public function logout(Request $request)
     {

@@ -14,13 +14,6 @@ class ProductController extends Controller
         return view('home', compact('products'));
     }
 
-    public function showByCategory(Categorie $categorie)
-    {
-        $products = $categorie->products;
-        $categoryName = $categorie->name;
-        return view('products', compact('products', 'categoryName'));
-    }
-
     public function showQuantityForm(Product $product)
     {
         return view('quantity', compact('product'));
