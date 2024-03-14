@@ -21,7 +21,7 @@
             @csrf
             <div>
                 <label for="quantity">Quantité :</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
             </div>
             <button type="submit">Ajouter au panier</button>
         </form>

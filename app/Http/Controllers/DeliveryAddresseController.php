@@ -69,6 +69,7 @@ class DeliveryAddresseController extends Controller
         $adresse->postcode = $request->postcode;
         $adresse->phone = $request->phone;
         $adresse->email = $request->email;
+        $adresse->registered = true;
 
         $adresse->save();
 
