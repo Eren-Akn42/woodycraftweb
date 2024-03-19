@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('delivery_addresse_id');
+            $table->unsignedBigInteger('delivery_addresse_id')->nullable();
             $table->foreign('delivery_addresse_id')->references('id')->on('delivery_addresses')->onDelete('cascade');
-            $table->tinyInteger('registered');
-            $table->string('payment_type');
-            $table->date('date');
-            $table->tinyInteger('status');
-            $table->string('session');
-            $table->float('total');
+            $table->tinyInteger('registered')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->string('session')->nullable();
+            $table->float('total')->nullable();
             $table->timestamps();
         });
     }

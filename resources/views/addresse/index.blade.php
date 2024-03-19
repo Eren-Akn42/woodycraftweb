@@ -15,7 +15,7 @@
         <li>{{ $customer->add2 }}</li>
     @endif
     @if ($customer->add3 != NULL)
-        <li>{{ $customer->add2 }}</li>
+        <li>{{ $customer->add3 }}</li>
     @endif
     <li>{{ $customer->postcode }}</li>
     <li>{{ $customer->phone }}</li>

@@ -8,7 +8,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class UserController extends Controller
 {
     public function register(Request $request)
     {

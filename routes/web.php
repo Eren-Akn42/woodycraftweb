@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CartController;
@@ -18,17 +18,17 @@ Route::get('/login', function () {
     return view('authentication.login');
 })->name('login');
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [UserController::class, 'login']);
 
 // Inscription
 Route::get('/register', function () {
     return view('authentication.register');
 })->name('register');
 
-Route::post('/register', [LoginController::class, 'register']);
+Route::post('/register', [UserController::class, 'register']);
 
 // Déconnexion
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Catégories
 Route::get('/categories', [CategorieController::class, 'index'], function () {
@@ -51,6 +51,11 @@ Route::get('/addresse/index', [DeliveryAddresseController::class, 'index'])->nam
 
 // Enregistrement d'une nouvelle adresse
 Route::post('/addresse', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
+
+// Paiement par chèque
+Route::get('/payment/cheque', function () {
+    return view('payment.cheque');
+})->name('payment.cheque');
 
 // Admin
 Route::get('/admin', function () {
