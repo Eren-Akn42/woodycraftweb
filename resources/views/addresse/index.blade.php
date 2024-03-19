@@ -8,8 +8,19 @@
 
     <h1>Vos Adresses</h1>
 
-    @foreach ($addresse as $addresse_elem)
-        <li>{{ $addresse_elem }}</li>
-    @endforeach
+    <li>{{ $customer->forename }}</li>
+    <li>{{ $customer->surname }}</li>
+    <li>{{ $customer->add1 }}</li>
+    @if ($customer->add2 != NULL)
+        <li>{{ $customer->add2 }}</li>
+    @endif
+    @if ($customer->add3 != NULL)
+        <li>{{ $customer->add2 }}</li>
+    @endif
+    <li>{{ $customer->postcode }}</li>
+    <li>{{ $customer->phone }}</li>
+    <li>{{ $customer->email }}</li>
+
+    <a href="{{ route('addresse.create') }}">Utiliser une adresse différente</a>
 
 @endsection
