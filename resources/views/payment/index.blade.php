@@ -21,8 +21,8 @@
     <li>{{ $address->phone }}</li>
     <li>{{ $address->email }}</li> <br>
 
-    <a href="https://www.paypal.com/paypalme/woodycraftweb">Payer avec Paypal</a>
+    {{-- <a href="{{ route(payment.paypal) }}">Payer avec Paypal</a> --}}
 
-    <a href="{{ route(payment.cheque) }}"></a>
+    <a href="{{ route('payment.cheque') }}">Payer par chèque</a>
 
 @endsection

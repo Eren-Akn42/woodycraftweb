@@ -44,13 +44,17 @@ Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name
 Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 // Formulaire de création d'une nouvelle adresse
-Route::get('/addresse/create', [DeliveryAddresseController::class, 'create'])->name('addresse.create');
+Route::get('/addresse/create', function () {
+    return view('addresse.create');
+})->name('addresse.create');
 
 // Pour lister les adresses existantes et fournir un bouton pour rediriger vers la création d'une nouvelle adresse
 Route::get('/addresse/index', [DeliveryAddresseController::class, 'index'])->name('addresse.index');
 
+Route::post('/addresse/use', [DeliveryAddresseController::class, 'use'])->name('addresse.use');
+
 // Enregistrement d'une nouvelle adresse
-Route::post('/addresse', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
+Route::post('/addresse/store', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
 
 // Paiement par chèque
 Route::get('/payment/cheque', function () {

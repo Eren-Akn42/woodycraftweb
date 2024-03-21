@@ -13,7 +13,7 @@
             <div>
                 <h2>{{ $categorie->name }}</h2>
                 <p>{{ $categorie->description }}</p>
-                <img src="{{ asset('img/' . $categorie->image) }}" alt="{{ $product->name }}">
+                <img src="{{ asset('img/' . $categorie->image) }}" alt="{{ $categorie->name }}">
                 <a href="{{ route('categorie.products', $categorie->id) }}">Voir la catégorie</a>
             </div>
         @endforeach

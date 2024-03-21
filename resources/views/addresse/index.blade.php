@@ -21,6 +21,8 @@
     <li>{{ $customer->phone }}</li>
     <li>{{ $customer->email }}</li>
 
+    <a href="{{ route('addresse.use') }}">Utiliser cette adresse</a>
+
     <a href="{{ route('addresse.create') }}">Utiliser une adresse différente</a>
 
 @endsection

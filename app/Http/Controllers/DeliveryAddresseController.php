@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class DeliveryAddresseController extends Controller
 {
+    // Fonction pour afficher l'adresse existante du user
     public function index()
     {
         if (Auth::check()) {
@@ -19,21 +20,28 @@ class DeliveryAddresseController extends Controller
                 return view('addresse.create');
             }
             return view('addresse.index', compact('customer'));
+        } else {
+            return view('addresse.create');
         }
     }
 
-    public function create()
+    // Utiliser une adresse existante pour un customer
+    public function use()
     {
-        return view('addresse.create');
+        if (Auth::check()) {
+            $customer = Auth::user()->customer;
+            $address = $customer;
+            session(['customer_id' => $customer->id]);
+            return view('payment.index', compact('address'));
+        } else {
+            return view('addresse.create');
+        }
     }
 
     public function store(Request $request)
     {
-
-        $cart = session()->get('cart', []);
-
         // Validation des données
-        $data = $request->validate([
+        $request->validate([
             'forename' => 'required',
             'surname' => 'required',
             'add1' => 'required',
@@ -43,6 +51,25 @@ class DeliveryAddresseController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
         ]);
+
+        // Création données customer première fois puis redirection vers page de paiement
+        if (Auth::check()) {
+            $customer = Auth::user()->customer;
+            if (!$customer->registered) {
+                $customer['forename'] = $request->forename;
+                $customer['surname'] = $request->surname;
+                $customer['add1'] = $request->add1;
+                $customer['add2'] = $request->add2;
+                $customer['add3'] = $request->add3;
+                $customer['postcode'] = $request->postcode;
+                $customer['phone'] = $request->phone;
+                $customer['email'] = $request->email;
+                $customer['registered'] = true;
+                $customer->update();
+                $address = $customer;
+                return view('payment.index', compact('address'));
+            }
+        }
 
         // Insertion en base de données
         $address = DeliveryAddresse::create([
@@ -56,37 +83,9 @@ class DeliveryAddresseController extends Controller
             'email' => $request->email,
         ]);
 
-        // Création des données du customer pour un user
-        if (Auth::check()) {
-            $customer = Auth::user()->customer;
+        session(['address_id' => $address->id]);
 
-            if (!$customer->registered) {
-                $data['registered'] = true;
-                $customer->update($data);
-            }
-        }
-
-        if (Auth::check()) {
-            $order = Order::create([
-                'customer_id' => Auth::user()->customer->id,
-                'delivery_addresse_id' => $address->id,
-                'registered' => FALSE,
-                'payment_type' => NULL,
-                'status' => 0,
-                'session' => NULL,
-                'total' => $cart['price'] * $cart['quantity'],
-            ]);
-        } else {
-            $order = Order::create([
-                'customer_id' => NULL,
-                'delivery_addresse_id' => $address->id,
-                'registered' => FALSE,
-                'payment_type' => NULL,
-                'status' => 0,
-                'session' => NULL,
-                'total' => NULL,
-            ]);
-        }
+        dd(Session::all());
 
         return view('payment.index', compact('address'));
     }
