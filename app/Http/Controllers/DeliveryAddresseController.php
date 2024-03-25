@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\DeliveryAddresse;
-use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -84,8 +83,6 @@ class DeliveryAddresseController extends Controller
         ]);
 
         session(['address_id' => $address->id]);
-
-        dd(Session::all());
 
         return view('payment.index', compact('address'));
     }

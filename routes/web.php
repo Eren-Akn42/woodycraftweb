@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryAddresseController;
+use App\Http\Controllers\PaymentController;
 
 // Accueil
 Route::get('/', [ProductController::class, 'index'] , function () {
@@ -35,7 +36,7 @@ Route::get('/categories', [CategorieController::class, 'index'], function () {
     return view('categories');
 })->name('categories');
 
-Route::get('/categories/{id}', [CategorieController::class, 'showByCategorie'])->name('categorie.products');
+Route::get('/categories/{categorie}', [CategorieController::class, 'showByCategorie'])->name('categorie.products');
 
 // Panier
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -57,9 +58,12 @@ Route::post('/addresse/use', [DeliveryAddresseController::class, 'use'])->name('
 Route::post('/addresse/store', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
 
 // Paiement par chèque
-Route::get('/payment/cheque', function () {
-    return view('payment.cheque');
-})->name('payment.cheque');
+Route::get('/payment/facture', [PaymentController::class, 'generatePDF'])->name('payment.facture');
+
+// Paiement via Paypal
+Route::get('/payment/paypal', function () {
+    return redirect('https://www.paypal.com/paypalme/woodycraftweb');
+});
 
 // Admin
 Route::get('/admin', function () {

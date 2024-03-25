@@ -23,6 +23,6 @@
 
     {{-- <a href="{{ route(payment.paypal) }}">Payer avec Paypal</a> --}}
 
-    <a href="{{ route('payment.cheque') }}">Payer par chèque</a>
+    <a href="{{ route('payment.facture') }}">Payer par chèque</a>
 
 @endsection
