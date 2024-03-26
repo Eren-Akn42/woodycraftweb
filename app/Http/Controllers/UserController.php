@@ -46,6 +46,8 @@ class UserController extends Controller
         // Gardien des utilisateurs standards
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
+            $user = Auth::user();
+            session(['customer_id' => $user->customer_id]);
             return redirect('/');
         }
 
