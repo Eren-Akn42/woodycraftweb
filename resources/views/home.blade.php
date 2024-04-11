@@ -5,13 +5,13 @@
 @endsection
 
 @section('content')
-
     <h1>Bienvenue sur Woodycraft</h1>
 
     <div>
         @foreach ($products as $product)
             <div>
                 <h2>{{ $product->name }}</h2>
+                <p>Quantité : {{ $product->quantity }}</p>
                 <p>{{ $product->description }}</p>
                 <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}">
                 <p>{{ number_format($product->price, 2) }}€</p>
@@ -19,5 +19,4 @@
             </div>
         @endforeach
     </div>
-
 @endsection

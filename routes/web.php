@@ -8,6 +8,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DeliveryAddresseController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AdminController;
 
 // Accueil
 Route::get('/', [ProductController::class, 'index'] , function () {
@@ -52,7 +53,7 @@ Route::get('/addresse/create', function () {
 // Pour lister les adresses existantes et fournir un bouton pour rediriger vers la création d'une nouvelle adresse
 Route::get('/addresse/index', [DeliveryAddresseController::class, 'index'])->name('addresse.index');
 
-Route::post('/addresse/use', [DeliveryAddresseController::class, 'use'])->name('addresse.use');
+Route::get('/addresse/use', [DeliveryAddresseController::class, 'use'])->name('addresse.use');
 
 // Enregistrement d'une nouvelle adresse
 Route::post('/addresse/store', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
@@ -66,6 +67,7 @@ Route::get('/payment/paypal', function () {
 });
 
 // Admin
-Route::get('/admin', function () {
-    return view('admin');
-});
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
+
+Route::post('/admin/validate/{orderId}', [AdminController::class, 'validateOrder'])->middleware('admin')->name('admin.validateOrder');

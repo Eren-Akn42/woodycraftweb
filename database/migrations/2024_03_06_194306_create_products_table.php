@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('categorie_id')->nullable();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
+            $table->integer('quantity');
             $table->text('description');
             $table->string('image');
             $table->float('price');

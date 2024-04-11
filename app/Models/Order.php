@@ -17,4 +17,9 @@ class Order extends Model
     {
         return $this->belongsTo(DeliveryAddresse::class);
     }
+
+    public function orderItems()
+{
+    return $this->hasMany(OrderItem::class);
+}
 }

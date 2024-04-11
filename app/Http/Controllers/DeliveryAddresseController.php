@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class DeliveryAddresseController extends Controller
 {
-    // Fonction pour afficher l'adresse existante du user
     public function index()
     {
         if (Auth::check()) {
@@ -24,7 +23,6 @@ class DeliveryAddresseController extends Controller
         }
     }
 
-    // Utiliser une adresse existante pour un customer
     public function use()
     {
         if (Auth::check()) {
@@ -39,8 +37,7 @@ class DeliveryAddresseController extends Controller
 
     public function store(Request $request)
     {
-        // Validation des données
-        $request->validate([
+        $validatedData = $request->validate([
             'forename' => 'required',
             'surname' => 'required',
             'add1' => 'required',
@@ -51,38 +48,23 @@ class DeliveryAddresseController extends Controller
             'email' => 'required|email',
         ]);
 
-        // Création données customer première fois puis redirection vers page de paiement
         if (Auth::check()) {
             $customer = Auth::user()->customer;
+
             if (!$customer->registered) {
-                $customer['forename'] = $request->forename;
-                $customer['surname'] = $request->surname;
-                $customer['add1'] = $request->add1;
-                $customer['add2'] = $request->add2;
-                $customer['add3'] = $request->add3;
-                $customer['postcode'] = $request->postcode;
-                $customer['phone'] = $request->phone;
-                $customer['email'] = $request->email;
-                $customer['registered'] = true;
-                $customer->update();
+                $customer->registered = true;
+                $customer->update($validatedData);
+                session(['customer_id' => $customer->id]);
                 $address = $customer;
                 return view('payment.index', compact('address'));
             }
+
+            session(['customer_id' => $customer->id]);
+            $address = DeliveryAddresse::create($validatedData);
+        } else {
+            $address = DeliveryAddresse::create($validatedData);
+            session(['address_id' => $address->id]);
         }
-
-        // Insertion en base de données
-        $address = DeliveryAddresse::create([
-            'forename' => $request->forename,
-            'surname' => $request->surname,
-            'add1' => $request->add1,
-            'add2' => $request->add2,
-            'add3' => $request->add3,
-            'postcode' => $request->postcode,
-            'phone' => $request->phone,
-            'email' => $request->email,
-        ]);
-
-        session(['address_id' => $address->id]);
 
         return view('payment.index', compact('address'));
     }
