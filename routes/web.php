@@ -59,12 +59,13 @@ Route::get('/addresse/use', [DeliveryAddresseController::class, 'use'])->name('a
 Route::post('/addresse/store', [DeliveryAddresseController::class, 'store'])->name('addresse.store');
 
 // Paiement par chèque
-Route::get('/payment/facture', [PaymentController::class, 'generatePDF'])->name('payment.facture');
+// Route::get('/payment/facture', [PaymentController::class, 'generatePDF'])->name('payment.facture');
+Route::get('payment/cheque', [PaymentController::class, 'listDataCheque'])->name('payment.cheque');
 
 // Paiement via Paypal
 Route::get('/payment/paypal', function () {
     return redirect('https://www.paypal.com/paypalme/woodycraftweb');
-});
+})->name('payment.paypal');
 
 // Admin
 

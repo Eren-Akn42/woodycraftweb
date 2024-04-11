@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function generatePDF()
+    public function listDataCheque()
     {
         $cart = session('cart', []);
         if (empty($cart)) {
